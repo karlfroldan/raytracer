@@ -21,7 +21,7 @@ main = do
     let filename1 = "output.ppm"
         ppm = canvasToPpm canvas
         filename  = "output.png"
-    writeFile filename ppm
+    writeFile filename1 ppm
     callCommand ("convert " ++ filename1 ++ " " ++ filename)
     callCommand ("rm " ++ filename1)
 
@@ -75,16 +75,16 @@ normalizeList xs = (\x -> (x - minXs) / (maxXs - minXs)) <$> xs
 normalizeTuple :: (Ord a, RealFrac a) => [(a, a)] -> [(a, a)]
 normalizeTuple = uncurry zip . bimap normalizeList normalizeList . unzip
 
--- normalizeTuple :: (Ord a, RealFrac a) => [(a, a)] -> [(a, a)]
--- normalizeTuple :: (Ord a, RealFrac a) => [(a, a)] -> 
--- normalizeTuple xs = normalizeList <$> (tupleToPair <$> xs)
 
+-- We want to scale it on the bounds of our canvas
 scaleTuple :: (RealFrac a) => Int -> Int -> (a, a) -> (Int, Int)
 scaleTuple w h (x, y) = (round $ fromIntegral w * x, round $ fromIntegral h * y)
 
+-- Unfortunately, our PPM code writes it with x-y inverted. So we want to invert the axes.
 invert :: [(b, a)] -> [(a, b)]
 invert = fmap invert'
     where invert' (x, y) = (y, x)
 
+-- The y-coordinate is upside down so we reverse it.
 reverseY :: RealFrac a => [(a, a)] -> [(a, a)]
 reverseY = fmap (second (1 -))
