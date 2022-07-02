@@ -2,8 +2,8 @@ module Raytracer.Tuple where
 
 import Raytracer.FloatEq
 
-data Tuple4 a = Tuple4 a a a a deriving (Eq)
-data Tuple3 a = Tuple3 a a a deriving (Eq)
+data Tuple4 a = Tuple4 a a a a deriving (Eq, Ord)
+data Tuple3 a = Tuple3 a a a deriving (Eq, Ord)
 
 instance Show a => Show (Tuple4 a) where 
     show (Tuple4 x y z w) =
