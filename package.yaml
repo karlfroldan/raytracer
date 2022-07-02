@@ -48,6 +48,7 @@ executables:
     dependencies:
     - raytracer
     - mtl >= 2.2.2
+    - process >= 1.6.10
 
 tests:
   raytracer-test:

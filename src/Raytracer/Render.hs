@@ -4,12 +4,12 @@ import Raytracer.Canvas
 import Raytracer.Color
 import Data.Foldable (Foldable(foldl'))
 import Raytracer.Tuple (Tuple3 (..))
-import Data.List (intersperse)
+import Data.List (intersperse, transpose)
 
 import Data.List.Split (chunksOf)
 
 canvasToPpm :: RealFrac a => Canvas (Color a) -> String
-canvasToPpm c = ppmHeader (width c) (height c) ++ ppmBody c
+canvasToPpm c = ppmHeader (cols c) (rows c) ++ ppmBody c
 
 -- | Create a list per color channel.
 colorsToList :: [Color a] -> ([a], [a], [a])
