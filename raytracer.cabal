@@ -7,12 +7,12 @@ cabal-version: 1.12
 name:           raytracer
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/raytracer#readme>
-homepage:       https://github.com/githubuser/raytracer#readme
-bug-reports:    https://github.com/githubuser/raytracer/issues
+homepage:       https://github.com/karlfroldan/raytracer#readme
+bug-reports:    https://github.com/karlfroldan/raytracer/issues
 author:         Author name here
-maintainer:     example@example.com
-copyright:      2022 Author name here
-license:        BSD3
+maintainer:     karlfroldan@gmail.com
+copyright:      2022 Karl Frederick R. Roldan
+license:        None
 build-type:     Simple
 extra-source-files:
     README.md
@@ -20,7 +20,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/raytracer
+  location: https://github.com/karlfroldan/raytracer
 
 library
   exposed-modules:
