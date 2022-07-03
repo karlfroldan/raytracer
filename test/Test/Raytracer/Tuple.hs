@@ -1,4 +1,4 @@
-module Tuple where 
+module Test.Raytracer.Tuple where 
 
 import Test.Hspec
 

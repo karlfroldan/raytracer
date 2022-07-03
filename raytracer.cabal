@@ -28,6 +28,7 @@ library
       Raytracer.Canvas
       Raytracer.Color
       Raytracer.FloatEq
+      Raytracer.Matrix
       Raytracer.Render
       Raytracer.Tuple
   other-modules:
@@ -76,8 +77,9 @@ test-suite raytracer-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Canvas
-      Tuple
+      Test.Raytracer.Canvas
+      Test.Raytracer.Matrix
+      Test.Raytracer.Tuple
       Paths_raytracer
   hs-source-dirs:
       test

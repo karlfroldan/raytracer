@@ -1,4 +1,4 @@
-module Canvas where 
+module Test.Raytracer.Canvas where 
 
 import Test.Hspec 
 
@@ -10,7 +10,7 @@ renderTests = describe "canvas.feature" $ do
     it "Constructing the PPM header" $ do 
         let c = newCanvas 5 3 (color 0 0 0) [] :: Canvas (Color Double) 
             ppm = canvasToPpm c 
-        ppmHeader (width c) (height c) `shouldBe` "P3\n5 3\n255\n"
+        ppmHeader (rows c) (cols c) `shouldBe` "P3\n5 3\n255\n"
 
     it "Constructing the PPM pixel data" $ do 
         let c1 = color 1.5 0 0 :: Color Double 
