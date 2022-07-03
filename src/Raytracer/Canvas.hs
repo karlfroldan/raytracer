@@ -4,8 +4,7 @@ import Data.Array
 
 import Data.List (sortBy)
 
-import Raytracer.Color
-import Raytracer.Tuple ((&*))
+import Raytracer.Color ( Color, scale )
 
 data Canvas a = Canvas
     { rows   :: Int

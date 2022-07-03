@@ -28,7 +28,6 @@ library
       Raytracer.Canvas
       Raytracer.Color
       Raytracer.FloatEq
-      Raytracer.Matrix
       Raytracer.Render
       Raytracer.Tuple
   other-modules:
@@ -38,6 +37,8 @@ library
   build-depends:
       array >=0.5.4.0 && <0.6.0.0
     , base >=4.7 && <5
+    , lens >=5
+    , linear >=1.20.0
     , mtl >=2.2.2
     , split >=0.2.3
   default-language: Haskell2010
@@ -52,6 +53,8 @@ executable projectile
   build-depends:
       array >=0.5.4.0 && <0.6.0.0
     , base >=4.7 && <5
+    , lens >=5
+    , linear >=1.20.0
     , mtl >=2.2.2
     , process >=1.6.10
     , raytracer
@@ -68,6 +71,8 @@ executable raytracer
   build-depends:
       array >=0.5.4.0 && <0.6.0.0
     , base >=4.7 && <5
+    , lens >=5
+    , linear >=1.20.0
     , mtl >=2.2.2
     , raytracer
     , split >=0.2.3
@@ -78,8 +83,6 @@ test-suite raytracer-test
   main-is: Spec.hs
   other-modules:
       Test.Raytracer.Canvas
-      Test.Raytracer.Matrix
-      Test.Raytracer.Tuple
       Paths_raytracer
   hs-source-dirs:
       test
@@ -88,6 +91,8 @@ test-suite raytracer-test
       array >=0.5.4.0 && <0.6.0.0
     , base >=4.7 && <5
     , hspec >=2.8.5
+    , lens >=5
+    , linear >=1.20.0
     , mtl >=2.2.2
     , raytracer
     , split >=0.2.3

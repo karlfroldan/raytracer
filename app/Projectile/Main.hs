@@ -1,4 +1,10 @@
 module Main where
+
+import Linear.V4 (V4 (..), _x, _y)
+import Linear.Vector ((^+^))
+
+import Control.Lens ((^.))
+
 import Raytracer.Tuple
 
 import Control.Monad (unless, mapM_)
@@ -10,8 +16,8 @@ import Raytracer.Render (canvasToPpm)
 import System.IO (openFile, IOMode (WriteMode))
 import System.Process (callCommand)
 
-data Projectile a = Projectile (Tuple4 a) (Tuple4 a) deriving (Eq, Show)
-data Environment a = Environment (Tuple4 a) (Tuple4 a) deriving (Eq, Show)
+data Projectile a = Projectile (V4 a) (V4 a) deriving (Eq, Show)
+data Environment a = Environment (V4 a) (V4 a) deriving (Eq, Show)
 
 main :: IO ()
 main = do
@@ -40,22 +46,22 @@ plot env proj = do
 
     return canvas
 
-tickIO :: (Show a, Num a, Ord a) => Environment a -> Projectile a -> IO ()
-tickIO e p = do
-    let Tuple4 _ yPos  _ _ = getPosition p
-    unless (yPos <= 0) $ do
-        print (getPosition p)
-        let newProj = tick e p
-        tickIO e newProj
+-- tickIO :: (Show a, Num a, Ord a) => Environment a -> Projectile a -> IO ()
+-- tickIO e p = do
+--     let Tuple4 _ yPos  _ _ = getPosition p
+--     unless (yPos <= 0) $ do
+--         print (getPosition p)
+--         let newProj = tick e p
+--         tickIO e newProj
 
 tick :: Num a => Environment a -> Projectile a -> Projectile a
 tick (Environment gravity wind) (Projectile position velocity) =
     Projectile pos vel
     where
-        pos = position <+> velocity
-        vel = velocity <+> gravity <+> wind
+        pos = position ^+^ velocity
+        vel = velocity ^+^ gravity ^+^ wind
 
-getPosition :: Projectile a -> Tuple4 a
+getPosition :: Projectile a -> V4 a
 getPosition (Projectile pos _) = pos
 
 tickUntil :: (Num a, Ord a) => a -> Environment a -> Projectile a -> [(a, a)]
@@ -63,7 +69,9 @@ tickUntil limit env proj
     | yPos <= 0 = []
     | otherwise = (xPos, yPos) : tickUntil limit env (tick env proj)
     where
-        Tuple4 xPos yPos zPos wPos = getPosition proj
+        pos = getPosition proj
+        xPos = pos ^. _x 
+        yPos = pos ^. _y
 
 -- | min-max feature scaling normalization. 
 -- We want to bring everything to the interval [0, 1]

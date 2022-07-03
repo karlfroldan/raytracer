@@ -3,7 +3,6 @@ module Raytracer.Render where
 import Raytracer.Canvas
 import Raytracer.Color
 import Data.Foldable (Foldable(foldl'))
-import Raytracer.Tuple (Tuple3 (..))
 import Data.List (intersperse, transpose)
 
 import Data.List.Split (chunksOf)
@@ -14,8 +13,8 @@ canvasToPpm c = ppmHeader (cols c) (rows c) ++ ppmBody c
 -- | Create a list per color channel.
 colorsToList :: [Color a] -> ([a], [a], [a])
 colorsToList =
-    foldr (\(Tuple3 r g b) (rs, gs, bs)  ->
-        (r:rs, g:gs, b:bs))
+    foldr (\c (rs, gs, bs)  ->
+        (red c:rs, green c:gs, blue c:bs))
         ([], [], [])
 
 -- | From each color channel list, create a single-spaced row .
@@ -32,7 +31,7 @@ ppmHeader w h =
 
 ppmBody :: RealFrac a => Canvas (Color a) -> String
 ppmBody c = unlines chunked ++ "\n"
-    where colors = concat $ (\(Tuple3 r g b) -> [r, g, b]) <$> canvasToList c
+    where colors = concat $ toRGBList <$> canvasToList c
           chunked = unwords . fmap show <$> chunksOf 17 colors
 
           
