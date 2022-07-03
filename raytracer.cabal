@@ -29,6 +29,7 @@ library
       Raytracer.Color
       Raytracer.FloatEq
       Raytracer.Render
+      Raytracer.Transformation
       Raytracer.Tuple
   other-modules:
       Paths_raytracer
@@ -83,6 +84,7 @@ test-suite raytracer-test
   main-is: Spec.hs
   other-modules:
       Test.Raytracer.Canvas
+      Test.Raytracer.Transformation
       Paths_raytracer
   hs-source-dirs:
       test
