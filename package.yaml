@@ -65,3 +65,4 @@ tests:
     dependencies:
     - raytracer
     - hspec >= 2.8.5
+    - HUnit >= 1.6.0.0

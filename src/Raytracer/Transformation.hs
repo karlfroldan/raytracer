@@ -9,5 +9,7 @@ translation x y z = V4 (V4 1 0 0 x) (V4 0 1 0 y) (V4 0 0 1 z) (V4 0 0 0 1)
 scaling :: Num a => a -> a -> a -> M44 a
 scaling x y z = V4 (V4 x 0 0 0) (V4 0 y 0 0) (V4 0 0 z 0) (V4 0 0 0 1)
 
-rotationX :: Num a => a -> M44 a
-rotationX theta = undefined
+rotationX :: Floating a => a -> M44 a
+rotationX theta = V4 (V4 1 0 0 0) (V4 0 cosT (-sinT) 0) (V4 0 sinT cosT 0) (V4 0 0 0 1)
+    where cosT = cos theta 
+          sinT = sin theta

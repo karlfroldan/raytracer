@@ -83,6 +83,7 @@ test-suite raytracer-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Test.Raytracer.Assertions
       Test.Raytracer.Canvas
       Test.Raytracer.Transformation
       Paths_raytracer
@@ -90,7 +91,8 @@ test-suite raytracer-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      array >=0.5.4.0 && <0.6.0.0
+      HUnit >=1.6.0.0
+    , array >=0.5.4.0 && <0.6.0.0
     , base >=4.7 && <5
     , hspec >=2.8.5
     , lens >=5

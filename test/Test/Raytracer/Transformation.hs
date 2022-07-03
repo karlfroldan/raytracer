@@ -1,13 +1,17 @@
 module Test.Raytracer.Transformation where
 
-import Raytracer.Transformation
 import Raytracer.Tuple
+import Raytracer.Transformation
 import Raytracer.FloatEq
 
 import Linear.Matrix ((!*), M44, inv44)
+import Linear.V4 (V4 (..))
 
 import Test.Hspec
 import GHC.Float (Floating(pi))
+
+import Test.Raytracer.Assertions (shouldApprox)
+
 
 transTests = do
     describe "transformations.feature" $ do 
@@ -49,8 +53,19 @@ transTests = do
                 p         = point 2 3 4
             transform !* p `shouldBe` point (-2) 3 4
         
-        it  "Rotating a point around the x axis" $ do 
-            let p         = point 0 1 0 :: M44 Double 
+        it  "Rotating a point around the x axis (1)" $ do 
+            let p         = point 0 1 0 :: V4 Double 
                 halfQuarter = rotationX (pi / 4)
                 fullQuarter = rotationX (pi / 2)
-            return ()
+            halfQuarter !* p =.= point 0 (sqrt 2 / 2) (sqrt 2 / 2) `shouldBe` True
+        
+        it  "Rotating a point around the x axis (2)" $ do 
+            let p         = point 0 1 0 :: V4 Double 
+                fullQuarter = rotationX (pi / 2)
+            fullQuarter !* p =.= point 0 0 1 `shouldBe` True
+        
+        it "The inverse of an x-rotation rotates in the opposite direction" $ do 
+            let p = point 0 1 0 :: V4 Double 
+                halfQuarter = rotationX (pi / 4)
+                inv         = inv44 halfQuarter 
+            inv !* p =.= point 0 (sqrt 2 / 2) (sqrt 2 / (-2)) `shouldBe` True
