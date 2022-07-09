@@ -116,27 +116,16 @@ transTests = do
             let t = shearing 0 0 0 0 0 1 :: M44 Double 
                 p = point 2 3 4
             t !* p `shouldSatisfy` (=.= point 2 3 7)
-        
-        it "Individual transformations are applied in sequence - rotation" $ do 
-            let p = point 1 0 1 :: V4 Double 
-                a = rotationX (pi / 2)
-                b = scaling 5 5 5
-                c = translation 10 5 7
-            a !* p `shouldSatisfy` (=.= point 1 (-1) 0)
-        it "Individual transformations are applied in sequence - scaling" $ do 
-            let p = point 1 0 1 :: V4 Double 
-                a = rotationX (pi / 2)
-                b = scaling 5 5 5
-                c = translation 10 5 7
-                p2 = a !* p
-            b !* p2 `shouldSatisfy` (=.= point 5 (-5) 0)
-        it "Individual transformations are applied in sequence - translation" $ do 
+
+        it "Individual transformations are applied in sequence" $ do 
             let p = point 1 0 1 :: V4 Double 
                 a = rotationX (pi / 2)
                 b = scaling 5 5 5
                 c = translation 10 5 7
                 p2 = a !* p 
                 p3 = b !* p2 
+            a !* p `shouldSatisfy` (=.= point 1 (-1) 0)
+            b !* p2 `shouldSatisfy` (=.= point 5 (-5) 0)
             c !* p3 `shouldSatisfy` (=.= point 15 0 7)
         
         it "Chained transformations must be applied in reverse order" $ do 
