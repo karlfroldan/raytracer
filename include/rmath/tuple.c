@@ -12,6 +12,11 @@ int max(int a, int b)
     return (a > b) ? a : b;
 }
 
+int min(int a, int b)
+{
+    return (a > b) ? b : a;
+}
+
 /* Compare doubles */
 int approx_d(double a, double b)
 {
@@ -35,9 +40,9 @@ int approx_v(tuple* v1, tuple* v2)
 
 /* Add two vectors. */
 tuple 
-tuple_addition(tuple* a, tuple* b, tuple* result) 
+add_tuple(tuple* a, tuple* b, tuple* result) 
 {
-    int n = max(a->size, b->size); 
+    int n = min(a->size, b->size); 
 
     result->size = n;
 
@@ -45,9 +50,20 @@ tuple_addition(tuple* a, tuple* b, tuple* result)
         result->arr[i] = a->arr[i] + b->arr[i];
 }
 
+tuple
+sub_tuple(tuple* a, tuple* b, tuple* r) 
+{
+    int n = min(a->size, b->size); 
+
+    r->size = n;
+
+    for (int i = 0; i < n; ++i)
+        r->arr[i] = a->arr[i] - b->arr[i];
+}
+
 /* Multiply a scalar and a vector. */
 tuple
-scalar_tuple_mult(double a, tuple* v, tuple* result) 
+mul_scalar_tuple(double a, tuple* v, tuple* result) 
 {
     result->size = v->size;
     for (int i = 0; i < v->size; ++i) 
