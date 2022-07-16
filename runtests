@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ ! -d "build" ]; then
+    echo "Build the project first.";
+else
+    for test in $(find build/tests -name '*_test'); do 
+        $(pwd)/${test}
+    done
+fi
