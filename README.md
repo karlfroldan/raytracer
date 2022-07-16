@@ -1,4 +1,5 @@
-# raytracer
-A purely functional ray tracer from the book "The Ray Tracer Challenge".
+# Raytracer in C
 
-> Note: I am not implementing every gherkin test in the book, especially in the first few chapters, as I will only be using the `linear` library instead of implementing everything from scratch.
+To build this repository, you would need to have at least Cmake 3.23 and [Check](https://libcheck.github.io).
+
+If you're on FreeBSD like me, I don't know why Cmake cannot find libcheck when installed using ports package. Instead, you can use [vcpkg](https://vcpkg.io) and compile it from source. 
