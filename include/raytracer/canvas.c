@@ -77,7 +77,7 @@ int write_color_at(char** buffer, int val, int char_counter)
 
 
     /* If we're nearing 70 characters, append a newline. */
-    if (char_counter >= 66)
+    if (char_counter >= 67)
     {
         sprintf(*buffer, "\n");
         char_counter = 0;
