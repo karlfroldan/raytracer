@@ -1,6 +1,7 @@
 #include "../bdd-for-c.h"
-#include <rmath/tuple.h>
 #include <math.h>
+
+#include <raytracer/tuple.h>
 
 #define CHECK_MACRO check(approx_v(&result, &expected));
 

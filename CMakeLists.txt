@@ -3,13 +3,13 @@ project(raytracer)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c17 -Wall -W")
 
-add_subdirectory(include/rmath)
+add_subdirectory(include/raytracer)
 
 # The test files.
 add_subdirectory(tests)
 
 include_directories(AFTER include)
 
-add_executable(sample apps/sample.c)
+add_executable(projectile apps/projectile/main.c)
 
-target_link_libraries(sample PRIVATE rmath)
+target_link_libraries(projectile PRIVATE raytracer)
