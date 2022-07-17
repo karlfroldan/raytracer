@@ -61,6 +61,9 @@ double t_dot(tuple* v, tuple* w);
 /* Cross product of two tuples of size 4. */
 tuple cross_product_4(tuple* v, tuple* w);
 
+/* Hadamard Product of two tuples. */
+tuple t_hadamard(tuple* v, tuple* w);
+
 /* Some accessors for tuples of size 3 or 4. */
 double _x(tuple*);
 double _y(tuple*);
@@ -72,5 +75,8 @@ void t_print(tuple*);
 
 /* Free the tuple. */
 void t_free(tuple*);
+
+/* Create a new Color Tuple */
+tuple color(double red, double green, double blue);
 
 #endif /* RMATH_TUPLE_H */

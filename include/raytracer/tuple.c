@@ -139,6 +139,20 @@ is_vector(tuple *v)
     return v->size == 4 && approx_d(v->arr[3], 0);
 }
 
+/* Hadamard Product of two tuples. */
+tuple 
+t_hadamard(tuple* v, tuple* w)
+{
+    int n = min(v->size, w->size);
+
+    tuple z = new_tuple(n);
+
+    for (int i = 0; i < n; ++i)
+        z.arr[i] = v->arr[i] * w->arr[i];
+
+    return z;
+}
+
 tuple vector(double a, double b, double c)
 {
     tuple v = new_tuple(4);
@@ -167,6 +181,21 @@ tuple new_tuple4(double a, double b, double c, double d)
     v.arr[2] = c;
     v.arr[3] = d;
     return v;
+}
+
+tuple new_tuple3(double a, double b, double c)
+{
+    tuple v = new_tuple(3);
+
+    v.arr[0] = a;
+    v.arr[1] = b;
+    v.arr[2] = c;
+    return v;
+}
+
+tuple color(double r, double g, double b)
+{
+    return new_tuple3(r, g, b);
 }
 
 tuple t_zeros(int size)
@@ -278,9 +307,13 @@ void t_print(tuple* v)
     if (n == 0)
         return;
     
+    /* Print the first n - 1 elements in the tuple. 
+    This will print nothing if the tuple is of size 1. */
     printf("(");
     for (int i = 0; i < n - 1; ++i)
         printf("%.2f, ", v->arr[i]);
+
+    /* Print the last element. */
     
     printf("%.2f)", v->arr[n - 1]);
 }
