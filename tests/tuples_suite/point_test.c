@@ -1,6 +1,7 @@
 #include "../bdd-for-c.h"
 
 #include <raytracer/tuple.h>
+#include <raytracer/raytracer_utils.h>
 
 spec("A tuple with w=1.0 (4.3, -4.2, 3.1, 1.0)")
 {

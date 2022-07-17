@@ -2,6 +2,7 @@
 #include <math.h>
 
 #include <raytracer/tuple.h>
+#include <raytracer/raytracer_utils.h>
 
 #define CHECK_MACRO check(t_approx(&result, &expected));
 
@@ -246,15 +247,5 @@ spec("Tuple Arithmetic")
         t_free(&expected);
         t_free(&a);
         t_free(&b);
-    }
-
-    it("Multiplying colors")
-    {
-        tuple c1 = color(1, 0.2, 0.4);
-        tuple c2 = color(0.9, 1, 0.1);
-        tuple result = t_hadamard(&c1, &c2);
-
-        tuple expected = color(0.9, 0.2, 0.04);
-        CHECK_MACRO
     }
 }

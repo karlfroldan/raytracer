@@ -5,11 +5,11 @@
 
 #include <stdio.h>
 
+#include "raytracer_utils.h"
+
 #define TRUE  1
 #define FALSE 0
 
-/* An epsilon for approximated equality between two numbers. */
-const double DEPSILON = 0.00001;
 
 tuple new_tuple(int size)
 {
@@ -45,12 +45,6 @@ int max(int a, int b)
 int min(int a, int b)
 {
     return (a > b) ? b : a;
-}
-
-/* Compare doubles */
-int approx_d(double a, double b)
-{
-    return fabs(a - b) < DEPSILON;
 }
 
 /* Compare vectors. */ 
@@ -191,11 +185,6 @@ tuple new_tuple3(double a, double b, double c)
     v.arr[1] = b;
     v.arr[2] = c;
     return v;
-}
-
-tuple color(double r, double g, double b)
-{
-    return new_tuple3(r, g, b);
 }
 
 tuple t_zeros(int size)

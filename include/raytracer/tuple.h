@@ -1,9 +1,5 @@
-#ifndef RMATH_TUPLE_H
-#define RMATH_TUPLE_H
-
-
-/* Compare whether two doubles are approx. */
-int approx_d(double, double);
+#ifndef RAYTRACER_TUPLE_H
+#define RAYTRACER_TUPLE_H
 
 /* 
  * A vector is a fixed-size array of numbers closed under the following operations:
@@ -76,7 +72,4 @@ void t_print(tuple*);
 /* Free the tuple. */
 void t_free(tuple*);
 
-/* Create a new Color Tuple */
-tuple color(double red, double green, double blue);
-
-#endif /* RMATH_TUPLE_H */
+#endif /* RAYTRACER_TUPLE_H */
