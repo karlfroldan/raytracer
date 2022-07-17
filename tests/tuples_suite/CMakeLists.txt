@@ -8,4 +8,4 @@ include_directories(AFTER ../../include)
 
 target_link_libraries(point_test PRIVATE rmath)
 target_link_libraries(vector_test PRIVATE rmath)
-target_link_libraries(tuple_arithmetic_test PRIVATE rmath)
+target_link_libraries(tuple_arithmetic_test PRIVATE rmath m)
