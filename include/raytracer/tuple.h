@@ -27,38 +27,38 @@ typedef struct tuple
 int approx_v(tuple*, tuple*);
 
 /* Add two vectors. */
-void add_tuple(tuple* a, tuple* b, tuple* result);
+tuple add_tuple(tuple* a, tuple* b);
 
 /* Subtract two tuples. */
-void sub_tuple(tuple* a, tuple* b, tuple* result);
+tuple sub_tuple(tuple* a, tuple* b);
 
 /* Multiply a scalar and a vector. */
-void mul_scalar_tuple(double a, tuple* v, tuple* result);
+tuple mul_scalar_tuple(double a, tuple* v);
 
 /* Divide a tuple by a scalar */
-void div_scalar_tuple(double a, tuple* v, tuple* result);
+tuple div_scalar_tuple(double a, tuple* v);
 
 /* Negate a tuple. */
-void negate_tuple(tuple* v, tuple* result);
+tuple negate_tuple(tuple* v);
 
 int is_point(tuple*);
 int is_vector(tuple*);
 
-void vector(tuple*, double, double, double);
-void point(tuple*, double, double, double);
-void new_tuple4(tuple*, double, double, double, double);
+tuple vector(double, double, double);
+tuple point(double, double, double);
+tuple new_tuple4(double, double, double, double);
 
 /* Compute the length of the vector, or magnitude. */
 double magnitude(tuple* v);
 
 /* Take an arbitrary vector and convert it into a unit vector */
-void normalize(tuple* v, tuple* result);
+tuple normalize(tuple* v);
 
 /* Get the dot product of two tuples */
 double dot(tuple* v, tuple* w);
 
 /* Cross product of two tuples of size 4. */
-void cross_product_4(tuple* v, tuple* w, tuple* result);
+tuple cross_product_4(tuple* v, tuple* w);
 
 /* Some accessors for tuples of size 3 or 4. */
 double _x(tuple*);

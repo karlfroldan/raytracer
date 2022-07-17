@@ -9,6 +9,16 @@
 /* An epsilon for approximated equality between two numbers. */
 const double DEPSILON = 0.00001;
 
+tuple new_tuple(int size)
+{
+    tuple t = {
+        malloc(sizeof(double) * size),
+        size
+    };
+
+    return t;
+}
+
 /* Reset a tuple. */
 void t_reset(tuple* v)
 {
@@ -57,61 +67,62 @@ int approx_v(tuple* v1, tuple* v2)
 }
 
 /* Add two vectors. */
-void 
-add_tuple(tuple* a, tuple* b, tuple* result) 
+tuple 
+add_tuple(tuple* a, tuple* b) 
 {
     int n = min(a->size, b->size); 
 
-    t_reset(result);
-    t_init(result, n);
+    tuple result = new_tuple(n);
 
     for (int i = 0; i < n; ++i)
-        result->arr[i] = a->arr[i] + b->arr[i];
+        result.arr[i] = a->arr[i] + b->arr[i];
+    return result;
 }
 
-void
-sub_tuple(tuple* a, tuple* b, tuple* r) 
+tuple
+sub_tuple(tuple* a, tuple* b) 
 {
     int n = min(a->size, b->size); 
 
-    t_reset(r);
-    t_init(r, n);
+    tuple result = new_tuple(n);
 
     for (int i = 0; i < n; ++i)
-        r->arr[i] = a->arr[i] - b->arr[i];
+        result.arr[i] = a->arr[i] - b->arr[i];
+
+    return result;
 }
 
 /* Multiply a scalar and a vector. */
-void
-mul_scalar_tuple(double a, tuple* v, tuple* result) 
+tuple
+mul_scalar_tuple(double a, tuple* v) 
 {
-    t_reset(result);
-    t_init(result, v->size);
+    tuple result = new_tuple(v->size);
 
     for (int i = 0; i < v->size; ++i) 
-        result->arr[i] = a * v->arr[i];
+        result.arr[i] = a * v->arr[i];
+    return result;
 }
 
 /* Divide a tuple by a scalar. */
-void 
-div_scalar_tuple(double a, tuple* v, tuple* result)
+tuple 
+div_scalar_tuple(double a, tuple* v)
 {
-    t_reset(result);
-    t_init(result, v->size);
+    tuple result = new_tuple(v->size);
 
     for (int i = 0; i < v->size; ++i)
-        result->arr[i] = v->arr[i] / a;
+        result.arr[i] = v->arr[i] / a;
+    return result;
 }
 
 /* Negate a tuple. */
-void 
-negate_tuple(tuple* v, tuple* result) 
+tuple 
+negate_tuple(tuple* v) 
 {
-    t_reset(result);
-    t_init(result, v->size);
+    tuple result = new_tuple(v->size);
 
     for (int i = 0; i < v->size; ++i)
-        result->arr[i] = -1 * v->arr[i];
+        result.arr[i] = -1 * v->arr[i];
+    return result;
 }
 
 int
@@ -126,34 +137,34 @@ is_vector(tuple *v)
     return v->size == 4 && approx_d(v->arr[3], 0);
 }
 
-void vector(tuple* v, double a, double b, double c)
+tuple vector(double a, double b, double c)
 {
-    v->arr = malloc(sizeof(double) * 4);
-    v->arr[0] = a;
-    v->arr[1] = b;
-    v->arr[2] = c;
-    v->arr[3] = 0.0;
-    v->size = 4;
+    tuple v = new_tuple(4);
+    v.arr[0] = a;
+    v.arr[1] = b;
+    v.arr[2] = c;
+    v.arr[3] = 0.0;
+    return v;
 }
 
-void point(tuple* v, double a, double b, double c)
+tuple point(double a, double b, double c)
 {
-    v->arr = malloc(sizeof(double) * 4);
-    v->arr[0] = a;
-    v->arr[1] = b;
-    v->arr[2] = c;
-    v->arr[3] = 1.0;
-    v->size = 4;
+    tuple v = new_tuple(4);
+    v.arr[0] = a;
+    v.arr[1] = b;
+    v.arr[2] = c;
+    v.arr[3] = 1.0;
+    return v;
 }
 
-void new_tuple4(tuple* v, double a, double b, double c, double d)
+tuple new_tuple4(double a, double b, double c, double d)
 {
-    v->arr = malloc(sizeof(double) * 4);
-    v->arr[0] = a;
-    v->arr[1] = b;
-    v->arr[2] = c;
-    v->arr[3] = d;
-    v->size = 4;
+    tuple  v = new_tuple(4);
+    v.arr[0] = a;
+    v.arr[1] = b;
+    v.arr[2] = c;
+    v.arr[3] = d;
+    return v;
 }
 
 double _x(tuple* t)
@@ -197,16 +208,16 @@ magnitude(tuple* v)
 }
 
 /* Take an arbitrary vector and convert it into a unit vector */
-void 
-normalize(tuple* v, tuple* result)
+tuple 
+normalize(tuple* v)
 {
     double m = magnitude(v);
 
-    t_reset(result);
-    t_init(result, v->size);
+    tuple result = new_tuple(v->size);
 
     for (int i = 0; i < v->size; ++i) 
-        result->arr[i] = v->arr[i] / m;
+        result.arr[i] = v->arr[i] / m;
+    return result;
 }
 
 /* Get the dot product of two tuples */
@@ -225,18 +236,17 @@ dot(tuple* v, tuple* w)
 
 
 /* Take an arbitrary vector and convert it into a unit vector */
-void 
-cross_product_4(tuple* a, tuple* b, tuple* result)
+tuple 
+cross_product_4(tuple* a, tuple* b)
 {
-    t_reset(result);
-    t_init(result, 4);
+    tuple result = new_tuple(4);
 
     assert(a->size == 4);
     assert(b->size == 4);
     assert(is_vector(a));
     assert(is_vector(b));
 
-    vector(result, 
+    return vector(
         _y(a) * _z(b) - _z(a) * _y(b),
         _z(a) * _x(b) - _x(a) * _z(b),
         _x(a) * _y(b) - _y(a) * _x(b)
