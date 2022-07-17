@@ -13,28 +13,74 @@ typedef struct environment
     tuple wind;
 } environment;
 
-void tick(environment* env, projectile* proj, projectile* new_proj);
+projectile tick(environment* env, projectile* proj);
+
+int y_is_zero(projectile* p)
+{
+    return _y(&(p->position)) < 0;
+}
 
 int main()
 {
-    tuple p_point, p_vector;
-    tuple e_v1, e_v2;
+    tuple pos = point(0, 1, 0);
+    tuple vel = vector(1, 1, 0);
+    tuple gra = vector(0, -0.1, 0);
+    tuple win = vector(-0.01, 0, 0);
 
-    printf("Hello Projectile!\n");
+    printf("Initial position of projectile: ");
+    t_print(&pos);
+    printf("\nInitial velocity of projectile: ");
+    t_print(&vel);
+    printf("\nGravity: ");
+    t_print(&gra);
+    printf("\nWind: ");
+    t_print(&win);
+    printf("\n");
+
+    projectile p = {
+        pos, t_normalize(&vel)
+    };
+
+    environment e = {
+        gra, win
+    };
+
+    int iter = 0;
+    
+    while (!y_is_zero(&p))
+    {
+        printf("\nIter %d\n", iter);
+        printf("Projectile position: ");
+        t_print(&(p.position));
+        printf("\n");
+
+        p = tick(&e, &p);
+
+        iter++;
+    }
+
+    t_free(&(p.position));
+    t_free(&(p.velocity));
+    t_free(&(e.gravity));
+    t_free(&(e.wind));
 
     return 0;
 }
 
-void tick(environment* env, projectile* proj, projectile* new_proj)
+projectile tick(environment* env, projectile* proj)
 {
-    tuple new_pos, arg_1, new_vel;
+    tuple temp = t_add(&(proj->velocity), &(env->gravity));
 
-    add_tuple(&(proj->position), &(proj->velocity), &new_pos);
-    add_tuple(&(proj->velocity), &(env->gravity), &arg_1);
-    add_tuple(&arg_1, &(env->wind), &new_vel);
+    projectile new_proj = {
+        /* position + velocity */
+        t_add(&(proj->position), &(proj->velocity)), /* Position */
+        /* velocity + gravity + wind */
+        t_add(&temp, &(env->wind)) /* velocity */
+    };
 
-    free(arg_1.arr);
+    // garbage collect.
+    t_free(&(proj->position));
+    t_free(&(proj->velocity));
 
-    new_proj->position = new_pos;
-    new_proj->velocity = new_vel;
+    return new_proj;
 }

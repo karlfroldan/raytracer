@@ -4,8 +4,7 @@
 
 spec("A tuple with w=0.0 (4.3, -4.2, 3.1, 0.0)")
 {
-    tuple a;
-    new_tuple4(&a, 4.3, -4.2, 3.1, 0.0);
+    tuple a  = new_tuple4(4.3, -4.2, 3.1, 0.0);
 
     it ("a.x = 4.3")
     {
@@ -27,5 +26,5 @@ spec("A tuple with w=0.0 (4.3, -4.2, 3.1, 0.0)")
         check(approx_d(_w(&a), 0.0));
     }
 
-    free(a.arr);
+    t_free(&a);
 }
