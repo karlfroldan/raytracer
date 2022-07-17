@@ -1,7 +1,7 @@
 #ifndef RAYTRACER_CANVAS_H
 #define RAYTRACER_CANVAS_H
 
-#include "tuple.h"
+#include "color.h"
 
 
 
@@ -11,24 +11,25 @@ typedef struct canvas
     the elements using an offset anyways. 
 
     Our canvas memory is laid out as
-    ROW1 col2 col3 col4... ROW2 col2 col3 col4...
+    ROW0 col2 col3 col4... ROW1 col2 col3 col4...
+    y    y+1  y+2  y+3     (y*width) (y*width)+1
 
     So to get the current c_data, 
-    c[row][col] = c[row * width + col]
+    c[x][y] = c[y * width + x]
     */
-    tuple* c_data; 
-    int height;  /* These two are */
-    int width;   /* pretty self-explanatory */
+    color* c_data; 
+    int width;  /* These two are */
+    int height;   /* pretty self-explanatory */
 } canvas;
 
 /* Create a new canvas initialized to BLACK. */
 canvas new_canvas(int width, int height);
 
 /* Get a pointer to the current color in the canvas point */
-tuple* pixel_at(canvas*, int row, int col);
+color* pixel_at(canvas*, int row, int col);
 
 /* Write a given color to the canvas */
-void write_color_1(canvas*, double red, double green, double blue, int row, int col);
+void write_color(canvas*, color _color, int x, int y);
 
 /* Write a given color to a canvas given some color */
 
@@ -38,5 +39,7 @@ int is_black(canvas*, int row, int col);
 
 /* Free the canvas */
 void c_free(canvas*);
+
+char* ppm(canvas*);
 
 #endif /* RAYTRACER_CANVAS_H */

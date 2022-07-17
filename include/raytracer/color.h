@@ -15,6 +15,14 @@ typedef struct color
     double blue;
 } color;
 
+/* A struct representing colors from 0-255. */
+typedef struct color_int
+{
+    int red;
+    int green;
+    int blue;
+} color_int;
+
 /* Create a new color given the RGB values. */
 color new_color(double red, double green, double blue);
 
@@ -26,6 +34,9 @@ color color_sub(color* c1, color* c2);
 color color_mul(double c, color* c2);
 /* Calculate the hadamard product of colors */
 color color_hadamard(color* c1, color* c2);
+
+/* Convert a color_double to color_int */
+color_int color_to_int(color* c);
 
 /* Approximated equality between two colors. */
 int c_approx(color* c1, color* c2);

@@ -2,6 +2,8 @@
 
 #include "raytracer_utils.h"
 
+#include <math.h>
+
 /* Create a new color given the RGB values. */
 color new_color(double red, double green, double blue)
 {
@@ -67,4 +69,26 @@ int c_approx(color* c1, color* c2)
         approx_d(c1->red, c2->red) && 
         approx_d(c1->green, c2->green) && 
         approx_d(c1->blue, c2->blue);
+}
+
+int clip(double x)
+{
+    if (x < 0)
+        return 0;
+    else if (x > 255)
+        return 255;
+    else 
+        return x;
+}
+
+/* Convert a color_double to color_int */
+color_int color_to_int(color* c)
+{
+    color_int a = {
+        clip(round(c->red * 255.0)),
+        clip(round(c->green * 255.0)),
+        clip(round(c->blue * 255.0))
+    };
+
+    return a;
 }
