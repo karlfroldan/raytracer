@@ -27,13 +27,13 @@ typedef struct tuple
 int approx_v(tuple*, tuple*);
 
 /* Add two vectors. */
-tuple add_tuple(tuple*, tuple*, tuple*);
+void add_tuple(tuple*, tuple*, tuple*);
 
 /* Subtract two tuples. */
-tuple sub_tuple(tuple*, tuple*, tuple*);
+void sub_tuple(tuple*, tuple*, tuple*);
 
 /* Multiply a scalar and a vector. */
-tuple mul_scalar_tuple(double, tuple*, tuple*);
+void mul_scalar_tuple(double, tuple*, tuple*);
 
 int is_point(tuple*);
 int is_vector(tuple*);

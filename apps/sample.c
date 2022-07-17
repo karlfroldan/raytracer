@@ -3,7 +3,5 @@
 
 int main() 
 {
-    tuple vec1;
-
     return 0;
 }

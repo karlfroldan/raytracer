@@ -1,5 +1,6 @@
 #include "tuple.h"
 #include <math.h> /* For fabs */
+#include <stdlib.h>
 
 #define TRUE  1
 #define FALSE 0
@@ -39,7 +40,7 @@ int approx_v(tuple* v1, tuple* v2)
 }
 
 /* Add two vectors. */
-tuple 
+void 
 add_tuple(tuple* a, tuple* b, tuple* result) 
 {
     int n = min(a->size, b->size); 
@@ -50,7 +51,7 @@ add_tuple(tuple* a, tuple* b, tuple* result)
         result->arr[i] = a->arr[i] + b->arr[i];
 }
 
-tuple
+void
 sub_tuple(tuple* a, tuple* b, tuple* r) 
 {
     int n = min(a->size, b->size); 
@@ -62,7 +63,7 @@ sub_tuple(tuple* a, tuple* b, tuple* r)
 }
 
 /* Multiply a scalar and a vector. */
-tuple
+void
 mul_scalar_tuple(double a, tuple* v, tuple* result) 
 {
     result->size = v->size;
