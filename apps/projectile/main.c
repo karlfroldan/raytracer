@@ -17,7 +17,7 @@ projectile tick(environment* env, projectile* proj);
 
 int y_is_zero(projectile* p)
 {
-    return _y(&(p->position)) < 0;
+    return p->position.y < 0;
 }
 
 int main()
@@ -59,11 +59,6 @@ int main()
         iter++;
     }
 
-    t_free(&(p.position));
-    t_free(&(p.velocity));
-    t_free(&(e.gravity));
-    t_free(&(e.wind));
-
     return 0;
 }
 
@@ -77,10 +72,6 @@ projectile tick(environment* env, projectile* proj)
         /* velocity + gravity + wind */
         t_add(&temp, &(env->wind)) /* velocity */
     };
-
-    // garbage collect.
-    t_free(&(proj->position));
-    t_free(&(proj->velocity));
 
     return new_proj;
 }

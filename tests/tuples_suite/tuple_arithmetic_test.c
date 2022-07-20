@@ -16,11 +16,6 @@ spec("Tuple Arithmetic")
         tuple result = t_add(&a1, &a2);
         tuple expected = point(1, 1, 6);
         CHECK_MACRO
-
-        t_free(&a1);
-        t_free(&a2);
-        t_free(&expected);
-        t_free(&result);
     }
 
     it("Subtracting two points.")
@@ -30,11 +25,6 @@ spec("Tuple Arithmetic")
         tuple result = t_sub(&a3, &a4);
         tuple expected = vector(-2, -4, -6);
         CHECK_MACRO
-
-        t_free(&a3);
-        t_free(&a4);
-        t_free(&expected);
-        t_free(&result);
     }
 
     it("Subtracting a vector from a point.")
@@ -44,11 +34,6 @@ spec("Tuple Arithmetic")
         tuple result = t_sub(&a3, &a5);
         tuple expected = point(-2, -4, -6);
         CHECK_MACRO
-
-        t_free(&a3);
-        t_free(&a5);
-        t_free(&expected);
-        t_free(&result);
     }
 
     it("Subtracting two vectors")
@@ -60,78 +45,52 @@ spec("Tuple Arithmetic")
 
         tuple expected = vector(-2, -4, -6);
         CHECK_MACRO
-
-        t_free(&a5);
-        t_free(&a6);
-        t_free(&expected);
-        t_free(&result);
     }
 
     it("Subtracting a vector from the zero vector")
     {
-        tuple zero = t_zeros(4);
+        tuple zero = ZERO_T;
         tuple v = vector(1, -2, 3);
         tuple result = t_sub(&zero, &v);
 
         tuple expected = vector(-1, 2, -3);
         CHECK_MACRO
-
-        t_free(&zero);
-        t_free(&v);
-        t_free(&expected);
-        t_free(&result);
     }
 
     it("Negating a tuple")
     {
-        tuple a = new_tuple4(1, -2, 3, -4);
-        tuple expected = new_tuple4(-1, 2, -3, 4);
+        tuple a = t_new(1, -2, 3, -4);
+        tuple expected = t_new(-1, 2, -3, 4);
         tuple result = t_negate(&a);
 
         CHECK_MACRO
-        
-        t_free(&a);
-        t_free(&expected);
-        t_free(&result);
     }
 
     it("Multiplying a tuple by a scalar")
     {
-        tuple a = new_tuple4(1, -2, 3, -4);
-        tuple expected = new_tuple4(3.5, -7, 10.5, -14);
+        tuple a = t_new(1, -2, 3, -4);
+        tuple expected = t_new(3.5, -7, 10.5, -14);
         tuple result = t_mul(3.5, &a);
 
         CHECK_MACRO
-
-        t_free(&a);
-        t_free(&expected);
-        t_free(&result);
     }
 
     it("Multiplying a tuple by a fraction")
     {
-        tuple a = new_tuple4(1, -2, 3, -4);
-        tuple expected = new_tuple4(0.5, -1, 1.5, -2);
+        tuple a = t_new(1, -2, 3, -4);
+        tuple expected = t_new(0.5, -1, 1.5, -2);
         tuple result = t_mul(0.5, &a);
 
         CHECK_MACRO
-
-        t_free(&a);
-        t_free(&expected);
-        t_free(&result);
     }
 
     it("Dividing a tuple by a scalar")
     {
-        tuple a = new_tuple4(1, -2, 3, -4);
-        tuple expected = new_tuple4(0.5, -1, 1.5, -2);
+        tuple a = t_new(1, -2, 3, -4);
+        tuple expected = t_new(0.5, -1, 1.5, -2);
         tuple result = t_div(2, &a);
 
         CHECK_MACRO
-
-        t_free(&a);
-        t_free(&expected);
-        t_free(&result);
     }
 
     it("Computing the magnitude of vector (1, 0, 0)")
@@ -139,7 +98,6 @@ spec("Tuple Arithmetic")
         tuple v = vector(1, 0, 0);
         
         check(approx_d(magnitude(&v), 1));
-        t_free(&v);
     }
 
     it("Computing the magnitude of vector (0, 1, 0)")
@@ -147,7 +105,6 @@ spec("Tuple Arithmetic")
         tuple v = vector(0, 1, 0);
         
         check(approx_d(magnitude(&v), 1));
-        t_free(&v);
     }
 
     it("Computing the magnitude of vector (0, 0, 1)")
@@ -155,24 +112,18 @@ spec("Tuple Arithmetic")
         tuple v = vector(0, 0, 1);
         
         check(approx_d(magnitude(&v), 1));
-
-        t_free(&v);
     }
 
     it("Computing the magnitude of vector (1, 2, 3)")
     {
         tuple v = vector(1, 2, 3);
         check(approx_d(magnitude(&v), sqrt(14)));
-
-        t_free(&v);
     }
 
     it("Computing the magnitude of vector (-1, -2, -3)")
     {
         tuple v = vector(-1, -2, -3);
         check(approx_d(magnitude(&v), sqrt(14)));
-
-        t_free(&v);
     }
 
     it("Normalizing vector (4, 0, 0) gives (1, 0, 0)")
@@ -182,10 +133,6 @@ spec("Tuple Arithmetic")
         tuple result = t_normalize(&v);
 
         CHECK_MACRO
-
-        t_free(&expected);
-        t_free(&v);
-        t_free(&result);
     }
 
     it("The magnitude of a normalized vector")
@@ -196,8 +143,6 @@ spec("Tuple Arithmetic")
         double m = magnitude(&result);
 
         check(approx_d(m, 1));
-        t_free(&v);
-        t_free(&result);
     }
 
     it("Normalizing vector (1, 2, 3)")
@@ -207,9 +152,6 @@ spec("Tuple Arithmetic")
         tuple result = t_normalize(&v);
 
         CHECK_MACRO
-
-        t_free(&v);
-        t_free(&expected);
     }
 
     it("The dot product of two tuples.")
@@ -220,9 +162,6 @@ spec("Tuple Arithmetic")
         double d = t_dot(&a, &b);
 
         check(approx_d(d, 20));
-
-        t_free(&a);
-        t_free(&b);
     }
 
     it("The cross product of two vectors.")
@@ -236,16 +175,9 @@ spec("Tuple Arithmetic")
 
         CHECK_MACRO
 
-        t_free(&result);
-        t_free(&expected);
 
         result = cross_product_4(&b, &a);
         expected = vector(1, -2, 1);
         CHECK_MACRO
-
-        t_free(&result);
-        t_free(&expected);
-        t_free(&a);
-        t_free(&b);
     }
 }

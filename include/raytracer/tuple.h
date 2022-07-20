@@ -1,6 +1,8 @@
 #ifndef RAYTRACER_TUPLE_H
 #define RAYTRACER_TUPLE_H
 
+#define ZERO_T t_new(0.0, 0.0, 0.0, 0.0)
+
 /* 
  * A vector is a fixed-size array of numbers closed under the following operations:
  * 1. Vector-to-vector addition
@@ -8,9 +10,14 @@
  */
 typedef struct tuple
 {
-    double *arr; /* Our implementation of a vector can only contain doubles. */
-    int    size; /* How many elements are there in our vector. */
+    double x;
+    double y;
+    double z;
+    double w;
 } tuple;
+
+/* Instantiate a new tule. */
+tuple t_new(double x, double y, double z, double w);
 
 /*********************
  * VECTOR OPERATIONS *
@@ -42,8 +49,6 @@ int is_vector(tuple*);
 
 tuple vector(double, double, double);
 tuple point(double, double, double);
-tuple new_tuple4(double, double, double, double);
-tuple t_zeros(int size);
 
 /* Compute the length of the vector, or magnitude. */
 double magnitude(tuple* v);
@@ -60,16 +65,7 @@ tuple cross_product_4(tuple* v, tuple* w);
 /* Hadamard Product of two tuples. */
 tuple t_hadamard(tuple* v, tuple* w);
 
-/* Some accessors for tuples of size 3 or 4. */
-double _x(tuple*);
-double _y(tuple*);
-double _z(tuple*);
-double _w(tuple*);
-
 /* Print tuple. */
 void t_print(tuple*);
-
-/* Free the tuple. */
-void t_free(tuple*);
 
 #endif /* RAYTRACER_TUPLE_H */
