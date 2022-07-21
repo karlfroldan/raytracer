@@ -6,8 +6,6 @@
 
 #include <math.h>
 
-#define PI 3.14159265359
-
 spec("Matrix tests")
 {
     it("Constructing and inspecting a 4x4 matrix")

@@ -8,6 +8,8 @@
 #define YAXIS 1
 #define ZAXIS 2
 
+#define PI 3.14159265359
+
 /* Create a translation matrix */
 matrix translate(double x, double y, double z);
 

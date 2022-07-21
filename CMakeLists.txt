@@ -11,5 +11,7 @@ add_subdirectory(tests)
 include_directories(AFTER include)
 
 add_executable(projectile apps/projectile/main.c)
+add_executable(clock apps/clock/main.c)
 
 target_link_libraries(projectile PRIVATE raytracer m)
+target_link_libraries(clock PRIVATE raytracer m)

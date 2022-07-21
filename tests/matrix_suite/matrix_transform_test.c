@@ -6,8 +6,6 @@
 
 #include <math.h>
 
-#define PI 3.14159265359
-
 spec("Matrix Transformation Tests")
 {
     it("Multiplying by a translation matrix")
