@@ -12,4 +12,4 @@ include_directories(AFTER include)
 
 add_executable(projectile apps/projectile/main.c)
 
-target_link_libraries(projectile PRIVATE raytracer)
+target_link_libraries(projectile PRIVATE raytracer m)
