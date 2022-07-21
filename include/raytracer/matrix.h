@@ -12,18 +12,36 @@ typedef struct matrix {
     tuple r2;
     tuple r3;
     tuple r4;
+
+    int dims;
 } matrix;
 
 /* Instantiate a new matrix.
 The input is a list of values in row-major order.
 If the list is shorter than 16 values, then the 
 others will be filled with 0s. */
-matrix m_new(double*, int);
+matrix m_new(double*, int, int);
+
+/* Create a 2x2 matrix. */
+matrix m_2(double*, int);
+
+/* Create a 3x3 matrix. */
+matrix m_3(double*, int);
+
+/* Create a 4x4 matrix. */
+matrix m_4(double*, int);
+
 
 /* 
  * Compares whether two matrices are approximated from each other. 
  * If their sizes are not equal, return 0.
  */
 int m_approx(matrix*, matrix*);
+
+/* Get the value of the matrix at some coordinate */
+double m_at(matrix*, int x, int y);
+
+/* Print the matrix. */
+void m_print(matrix*);
 
 #endif
