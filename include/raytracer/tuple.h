@@ -3,18 +3,7 @@
 
 #define ZERO_T t_new(0.0, 0.0, 0.0, 0.0)
 
-/* 
- * A vector is a fixed-size array of numbers closed under the following operations:
- * 1. Vector-to-vector addition
- * 2. Vector-to-scalar/scalar-to-vector multiplication.
- */
-typedef struct tuple
-{
-    double x;
-    double y;
-    double z;
-    double w;
-} tuple;
+#include "types.h"
 
 /* Instantiate a new tule. */
 tuple t_new(double x, double y, double z, double w);

@@ -1,20 +1,7 @@
 #ifndef RAYTRACER_MATRIX_H
 #define RAYTRACER_MATRIX_H
 
-#include "tuple.h"
-
-/**
- * A 4x4 matrix specifically made for this raytracer project.
- * Each tuple in the matrix is one row.
- */
-typedef struct matrix {
-    tuple r1; 
-    tuple r2;
-    tuple r3;
-    tuple r4;
-
-    int dims;
-} matrix;
+#include "types.h"
 
 /* Return a copy of the given matrix with the row and column removed. */
 matrix submatrix(matrix*, int, int);
@@ -39,7 +26,6 @@ matrix m_zero(int);
 
 /* Identity matrix */
 matrix m_id(int);
-
 
 /* 
  * Compares whether two matrices are approximated from each other. 

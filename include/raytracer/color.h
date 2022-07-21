@@ -1,19 +1,14 @@
 #ifndef RAYTRACER_COLOR_H
 #define RAYTRACER_COLOR_H
 
+#include "types.h"
+
 #define BLACK new_color(0.0, 0.0, 0.0)
 #define RED   new_color(1.0, 0.0, 0.0)
 #define GREEN new_color(0.0, 1.0, 0.0)
 #define BLUE  new_color(0.0, 0.0, 1.0)
 #define WHITE new_color(1.0, 1.0, 1.0)
 
-/* A struct representing a color. */
-typedef struct color
-{
-    double red;
-    double green;
-    double blue;
-} color;
 
 /* A struct representing colors from 0-255. */
 typedef struct color_int

@@ -1,10 +1,8 @@
 #ifndef RAYTRACER_SPHERE_H
 #define RAYTRACER_SPHERE_H
 
-typedef struct sphere 
-{
-    int uid;
-} sphere;
+#include "types.h"
 
 sphere new_sphere();
+
 #endif
