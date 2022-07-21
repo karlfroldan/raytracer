@@ -1,7 +1,12 @@
 #include <raytracer/matrix.h>
+#include <raytracer/matrix_transformations.h>
 
 #include "../bdd-for-c.h"
 #include <raytracer/raytracer_utils.h>
+
+#include <math.h>
+
+#define PI 3.14159265359
 
 spec("Matrix tests")
 {
@@ -434,4 +439,5 @@ spec("Matrix tests")
 
         check(m_approx(&inv_c, &a));
     }
+
 }
