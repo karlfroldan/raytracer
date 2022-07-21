@@ -1,0 +1,6 @@
+#ifndef RAYTRACER_INTERSECTIONS_H
+#define RAYTRACER_INTERSECTIONS_H
+
+
+
+#endif

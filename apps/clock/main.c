@@ -6,6 +6,9 @@
 
 #include <math.h>
 
+const int CANVAS_SIZE = 500;
+const int SCALE_FACTOR = (int) CANVAS_SIZE * 0.40;
+const int TRANSLATE_FACTOR = CANVAS_SIZE / 2;
 const double HOUR_ROTATION = PI/6;
 
 int trim(double x)
@@ -15,10 +18,10 @@ int trim(double x)
 
 int main()
 {
-    canvas c = new_canvas(200, 200);
+    canvas c = new_canvas(CANVAS_SIZE, CANVAS_SIZE);
     matrix rotation = rotate(YAXIS, HOUR_ROTATION);
-    matrix scaling = scale(80, 80, 80);
-    matrix translated = translate(100, 0, 100);
+    matrix scaling = scale(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR);
+    matrix translated = translate(TRANSLATE_FACTOR, 0, TRANSLATE_FACTOR);
 
     tuple clock_pos = point(0, 0, 1);
     tuple scaled, moved;

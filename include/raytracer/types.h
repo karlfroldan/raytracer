@@ -1,0 +1,4 @@
+#ifndef RAYTRACER_TYPES_H
+#define RAYTRACER_TYPES_H
+
+#endif
