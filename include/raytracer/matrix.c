@@ -1,6 +1,8 @@
 #include "matrix.h"
 #include <stdio.h>
 
+#include "raytracer_utils.h"
+
 /* Create a zero matrix of some dimension. */
 matrix m_zero(int dims)
 {
@@ -250,6 +252,25 @@ matrix m_mul(matrix* a, matrix* b)
     return m;
 }
 
+/* Adding matrices */
+matrix m_add(matrix* a, matrix* b)
+{
+    int n = a->dims;
+
+    matrix r = m_zero(n);
+
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j) 
+        {
+            int v = m_at(a, i, j) + m_at(b, i, j);
+            m_update_at(&r, i, j, v);
+        }
+    }
+
+    return r;
+}
+
 /* Matrix multiplied by a tuple. */
 tuple m_mul_tuple(matrix* m, tuple* a)
 {
@@ -339,4 +360,102 @@ matrix transpose(matrix* m)
     }
 
     return a;
+}
+
+/* Calculate the determinant of a matrix. */
+double det(matrix* m)
+{
+    double determinant = 0.0;
+
+    if (m->dims == 2)
+    {
+        double a, b, c, d;
+        a = m_at(m, 0, 0);
+        b = m_at(m, 0, 1);
+        c = m_at(m, 1, 0);
+        d = m_at(m, 1, 1);
+        determinant = (a * d) - (b * c);
+    } 
+    else 
+    {
+        for (int i = 0; i < m->dims; ++i)
+        {
+            double cof = cofactor(m, 0, i);
+            double v   = m_at(m, 0, i);
+
+            determinant += v * cof;
+        }
+
+    }
+
+    return determinant;
+}
+
+matrix submatrix(matrix* m, int a, int b)
+{
+    int ndim = m->dims - 1;
+    matrix r = m_zero(ndim);
+
+    for (int i = 0; i < m->dims; ++i)
+    {
+        if (i == a)
+            continue;
+
+        for (int j = 0; j < m->dims; ++j)
+        {
+            if (j == b)
+                continue;
+
+            int _i = i >= a ? i - 1 : i;
+            int _j = j >= b ? j - 1 : j;
+
+            double v = m_at(m, i, j);
+            m_update_at(&r, _i, _j, v);
+        }
+    }
+
+    return r;
+}
+
+
+/* Compute the minor at (i, j) of a matrix m */
+double minor(matrix* m, int i, int j)
+{
+    matrix s = submatrix(m, i, j);
+
+    return det(&s);
+}
+
+/* Compute the cofactor at (i, j) of a matrix m */
+double cofactor(matrix* m, int i, int j)
+{
+    double sign = (double) ((i + j) % 2 == 0 ? 1 : -1);
+
+    return minor(m, i, j) * sign;
+}
+
+/* Test whether a given matrix is invertible. */
+int is_invertible(matrix* m)
+{
+    return !approx_d(0, det(m));
+}
+
+/* Calculating the inverse of a matrix. */
+matrix m_inverse(matrix* m)
+{
+    if (!is_invertible(m))
+        return m_zero(m->dims);
+    matrix m2 = m_zero(m->dims);
+
+    for (int i = 0; i < m->dims; ++i)
+    {
+        for (int j = 0; j < m->dims; ++j)
+        {
+            double cof = cofactor(m, i, j);
+
+            m_update_at(&m2, j, i, cof / det(m));
+        }
+    }
+
+    return m2;
 }

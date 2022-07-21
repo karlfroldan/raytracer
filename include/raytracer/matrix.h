@@ -16,6 +16,9 @@ typedef struct matrix {
     int dims;
 } matrix;
 
+/* Return a copy of the given matrix with the row and column removed. */
+matrix submatrix(matrix*, int, int);
+
 /* Instantiate a new matrix.
 The input is a list of values in row-major order.
 If the list is shorter than 16 values, then the 
@@ -63,5 +66,23 @@ matrix m_mul(matrix*, matrix*);
 
 /* Matrix multiplied by a tuple. */
 tuple m_mul_tuple(matrix*, tuple*);
+
+/* Adding matrices */
+matrix m_add(matrix*, matrix*);
+
+/* Calculate the determinant of a matrix. */
+double det(matrix*);
+
+/* Compute the minor at (i, j) of a matrix m */
+double minor(matrix*, int i, int j);
+
+/* Compute the cofactor at (i, j) of a matrix m */
+double cofactor(matrix*, int i, int j);
+
+/* Test whether a given matrix is invertible. */
+int is_invertible(matrix*);
+
+/* Calculating the inverse of a matrix. */
+matrix m_inverse(matrix*);
 
 #endif
