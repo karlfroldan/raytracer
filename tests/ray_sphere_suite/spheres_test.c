@@ -13,23 +13,23 @@ spec("Spheres tests")
         ray r = new_ray(point(0, 0, -5), vector(0, 0, 1));
         sphere s = new_sphere();
 
-        intersection is = sr_intersects(&s, &r);
+        intersections is = sr_intersects(&s, &r);
 
         check(is.count ==  2);
-        check(approx_d(is.int_0, 4.0))
-        check(approx_d(is.int_1, 6.0));
+        check(approx_d(its_get(&is, 0), 4.0))
+        check(approx_d(its_get(&is, 1), 6.0));
     }
 
-    it(" A ray intersects a sphere at a tangent")
+    it("A ray intersects a sphere at a tangent")
     {
         ray r = new_ray(point(0, 1, -5), vector(0, 0, 1));
         sphere s = new_sphere();
 
-        intersection is = sr_intersects(&s, &r);
+        intersections is = sr_intersects(&s, &r);
 
         check(is.count ==  2);
-        check(approx_d(is.int_0, 5.0))
-        check(approx_d(is.int_1, 5.0));
+        check(approx_d(its_get(&is, 0), 5.0))
+        check(approx_d(its_get(&is, 1), 5.0));
     }
 
     it("A ray misses a sphere")
@@ -37,7 +37,7 @@ spec("Spheres tests")
         ray r = new_ray(point(0, 2, -5), vector(0, 0, 1));
         sphere s = new_sphere();
 
-        intersection is = sr_intersects(&s, &r);
+        intersections is = sr_intersects(&s, &r);
 
         check(is.count == 0);
     }
@@ -47,10 +47,10 @@ spec("Spheres tests")
         ray r = new_ray(point(0, 0, 5), vector(0, 0, 1));
         sphere s = new_sphere();
 
-        intersection is = sr_intersects(&s, &r);
+        intersections is = sr_intersects(&s, &r);
 
         check(is.count ==  2);
-        check(approx_d(is.int_0, -6.0))
-        check(approx_d(is.int_1, -4.0));
+        check(approx_d(its_get(&is, 0), -6.0))
+        check(approx_d(its_get(&is, 1), -4.0));
     }
 }

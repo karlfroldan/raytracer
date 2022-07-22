@@ -1,13 +1,16 @@
 #include "intersections.h"
-
+#include "intersection_list.h"
+#include "types.h"
 #include "tuple.h"
+
 #include <math.h>
 
+
 /* check whether a sphere and a ray intersects */
-intersection 
+intersections 
 sr_intersects(sphere* s, ray* r)
 {
-    intersection it;
+    intersections it;
     tuple w_origin = point(0, 0, 0);
     tuple s_to_r = t_sub(&(r->origin), &w_origin);
 
@@ -25,9 +28,8 @@ sr_intersects(sphere* s, ray* r)
     }
     else
     {
-        it.count = 2;
-        it.int_0 = (-b - sqrt(disc)) / (2 * a);
-        it.int_1 = (-b + sqrt(disc)) / (2 * a);
+        its_insert(&it, (-b - sqrt(disc)) / (2 * a));
+        its_insert(&it, (-b + sqrt(disc)) / (2 * a));
 
         return it;
     }

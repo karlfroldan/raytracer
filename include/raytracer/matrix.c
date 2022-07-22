@@ -61,7 +61,6 @@ matrix m_new(double* vals, int n, int dims)
             rs[k].z = 0;
         else
             rs[k].w = 0;
-        p++;
     }
 
     matrix m = {rs[0], rs[1], rs[2], rs[3], dims};
