@@ -46,5 +46,16 @@ typedef struct ray
     tuple direction;
 } ray;
 
+/* 
+    A struct that contains information on the
+    intersection of two objects
+*/
+typedef struct intersection
+{
+    int count;
+    /* Intersections */
+    double int_0;
+    double int_1;
+} intersection;
 
 #endif
