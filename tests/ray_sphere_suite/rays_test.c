@@ -1,6 +1,8 @@
 #include "../bdd-for-c.h"
 
 #include <raytracer/ray.h>
+#include <raytracer/tuple.h>
+#include <raytracer/sphere.h>
 
 spec("Rays test")
 {

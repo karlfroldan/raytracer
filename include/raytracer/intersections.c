@@ -25,6 +25,7 @@ sr_intersects(sphere* s, ray* r)
     }
     else
     {
+        it.count = 2;
         it.int_0 = (-b - sqrt(disc)) / (2 * a);
         it.int_1 = (-b + sqrt(disc)) / (2 * a);
 

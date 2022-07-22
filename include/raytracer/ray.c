@@ -1,5 +1,7 @@
 #include "ray.h"
 
+#include "tuple.h"
+
 /* Create a new ray. */
 ray new_ray(tuple origin, tuple direction)
 {

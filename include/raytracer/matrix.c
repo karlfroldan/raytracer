@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "raytracer_utils.h"
+#include "tuple.h"
 
 /* Create a zero matrix of some dimension. */
 matrix m_zero(int dims)
