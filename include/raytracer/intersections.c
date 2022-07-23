@@ -4,13 +4,16 @@
 #include "tuple.h"
 
 #include <math.h>
+#include <stdlib.h>
+#include <float.h>
 
 
 /* check whether a sphere and a ray intersects */
-intersections 
+struct intersections 
 sr_intersects(sphere* s, ray* r)
 {
-    intersections it;
+    struct intersections it;
+    it.count = 0;
     tuple w_origin = point(0, 0, 0);
     tuple s_to_r = t_sub(&(r->origin), &w_origin);
 
@@ -28,9 +31,42 @@ sr_intersects(sphere* s, ray* r)
     }
     else
     {
-        its_insert(&it, (-b - sqrt(disc)) / (2 * a));
-        its_insert(&it, (-b + sqrt(disc)) / (2 * a));
+        double t_1, t_2;
+        t_1 = (-b - sqrt(disc)) / (2 * a);
+        t_2 = (-b + sqrt(disc)) / (2 * a);
+
+        intersection_node n1 = intersection(t_1, (void*) s, OBJECT_SPHERE);
+        intersection_node n2 = intersection(t_2, (void*) s, OBJECT_SPHERE);
+
+        its_insert(&it, &n1);
+        its_insert(&it, &n2);
 
         return it;
     }
+}
+
+/* Returns which intersection the ray hits. */
+intersection_node* hit(struct intersections* its)
+{
+    if (its->count == 0)
+        return NULL;
+    
+    intersection_node* temp, *min_node;
+    temp = its->head;
+    min_node = NULL; /* We might have to return NULL. */
+    double min_value = DBL_MAX;
+
+    /* Return the one with the lowest t_value. */
+    while (temp != NULL)
+    {
+        if (min_value > temp->t_value && temp->t_value >= 0.0)
+        {
+            min_node = temp;
+            min_value = min_node->t_value;
+        }
+            
+        temp = temp->next;
+    }
+
+    return min_node;
 }

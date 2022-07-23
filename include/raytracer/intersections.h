@@ -5,7 +5,10 @@
 #include "types.h"
 
 /* check whether a sphere and a ray intersects */
-intersections
+struct intersections
 sr_intersects(sphere*, ray*);
+
+/* Returns which intersection the ray hits. */
+intersection_node* hit(struct intersections* its);
 
 #endif
