@@ -5,7 +5,6 @@
 
 #include <math.h>
 #include <stdlib.h>
-#include <float.h>
 
 
 /* check whether a sphere and a ray intersects */
@@ -51,22 +50,23 @@ intersection_node* hit(struct intersections* its)
     if (its->count == 0)
         return NULL;
     
-    intersection_node* temp, *min_node;
-    temp = its->head;
-    min_node = NULL; /* We might have to return NULL. */
-    double min_value = DBL_MAX;
+    intersection_node* temp;
 
-    /* Return the one with the lowest t_value. */
-    while (temp != NULL)
+    /* Usually, this is the minimum. */
+    temp = tree_minimum(its->root);
+
+    int should_be_null = 0;
+    int counter = 0;
+
+    /* Return the one with the lowest positive t_value. */
+    while (temp != NULL && temp->t_value < 0)
     {
-        if (min_value > temp->t_value && temp->t_value >= 0.0)
-        {
-            min_node = temp;
-            min_value = min_node->t_value;
-        }
-            
-        temp = temp->next;
+        temp = successor(temp);
+        counter++;
     }
 
-    return min_node;
+    if (counter == its->count)
+        return NULL;
+
+    return temp;
 }

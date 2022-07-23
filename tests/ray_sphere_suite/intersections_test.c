@@ -19,7 +19,7 @@ spec("Intersections test")
         check(s_ptr == &s);
     }
 
-    it("Aggregting intersections")
+    it("Aggregating intersections")
     {
         sphere s = new_sphere();
 
@@ -65,6 +65,8 @@ spec("Intersections test")
         intersection_node* i = hit(&xs);
 
         check(same_intersection(&i1, i));
+
+        free_intersection_list(&xs); 
     }
 
     it("The hit, when some intersections have negative t.")
@@ -84,6 +86,8 @@ spec("Intersections test")
         i = hit(&xs);
 
         check(same_intersection(&i2, i));
+
+        free_intersection_list(&xs); 
     }
 
     it("The hit, when all intersections have negative t.")
@@ -103,6 +107,8 @@ spec("Intersections test")
         i = hit(&xs);
 
         check(i == NULL);
+
+        free_intersection_list(&xs); 
     }
 
     it("The hit is always the lowest nonnegative intersection.")
@@ -126,5 +132,7 @@ spec("Intersections test")
         i = hit(&xs);
 
         check(same_intersection(&i4, i));
+
+        free_intersection_list(&xs); 
     }
 }
