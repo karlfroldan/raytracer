@@ -3,6 +3,8 @@
 #include <raytracer/ray.h>
 #include <raytracer/tuple.h>
 #include <raytracer/sphere.h>
+#include <raytracer/matrix.h>
+#include <raytracer/matrix_transformations.h>
 
 spec("Rays test")
 {
@@ -37,5 +39,33 @@ spec("Rays test")
         check(t_approx(&e2, &r2));
         check(t_approx(&e3, &r3));
         check(t_approx(&e4, &r4));
+    }
+
+    it("Translating a ray")
+    {
+        ray r = new_ray(point(1, 2, 3), vector(0, 1, 0));
+        matrix m = translate(3, 4, 5);
+
+        ray r2 = ray_transform(&r, &m);
+
+        tuple origin_e = point(4, 6, 8);
+        tuple direct_e = vector(0, 1, 0);
+
+        check(t_approx(&(r2.origin), &origin_e));
+        check(t_approx(&(r2.direction), &direct_e));
+    }
+
+    it("Scaling a ray")
+    {
+        ray r = new_ray(point(1, 2, 3), vector(0, 1, 0));
+        matrix m = scale(2, 3, 4);
+
+        ray r2 = ray_transform(&r, &m);
+
+        tuple origin_e = point(2, 6, 12);
+        tuple direct_e = vector(0, 3, 0);
+
+        check(t_approx(&(r2.origin), &origin_e));
+        check(t_approx(&(r2.direction), &direct_e));
     }
 }

@@ -37,7 +37,14 @@ typedef struct matrix {
 
 typedef struct sphere 
 {
-    int uid;
+    /* int uid; */
+
+    /* sphere transformation 
+        the inverse will be used for 
+        transforming the rays
+        being casted on this sphere.
+    */
+    matrix transformation; 
 } sphere;
 
 typedef struct ray 
