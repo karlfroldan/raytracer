@@ -7,3 +7,6 @@ include_directories(AFTER ../../include)
 
 target_link_libraries(colors_test PRIVATE raytracer)
 target_link_libraries(canvas_test PRIVATE raytracer m)
+
+add_test(Colors_Test colors_test)
+add_test(Canvas_Test canvas_test)

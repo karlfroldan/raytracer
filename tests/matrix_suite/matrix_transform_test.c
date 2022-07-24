@@ -1,7 +1,7 @@
 #include <raytracer/matrix.h>
 #include <raytracer/matrix_transformations.h>
 
-#include "../bdd-for-c.h"
+#include "../bdd_tap.h"
 #include <raytracer/raytracer_utils.h>
 
 #include <math.h>

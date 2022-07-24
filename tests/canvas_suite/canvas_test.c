@@ -1,6 +1,6 @@
 #include <raytracer/canvas.h>
 
-#include "../bdd-for-c.h"
+#include "../bdd_tap.h"
 #include <string.h>
 #include <raytracer/color.h>
 

@@ -1,4 +1,4 @@
-#include "../bdd-for-c.h"
+#include "../bdd_tap.h"
 
 #include <raytracer/tuple.h>
 #include <raytracer/raytracer_utils.h>

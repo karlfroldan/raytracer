@@ -10,3 +10,7 @@ include_directories(AFTER ../../include)
 target_link_libraries(ray_test PRIVATE raytracer)
 target_link_libraries(spheres_test PRIVATE raytracer)
 target_link_libraries(intersections_test PRIVATE raytracer m)
+
+add_test(Ray_Test ray_test)
+add_test(Spheres_Test spheres_test)
+add_test(Intersections_Test intersections_test)

@@ -1,4 +1,4 @@
-#include "../bdd-for-c.h"
+#include "../bdd_tap.h"
 
 #include <raytracer/intersections.h>
 #include <raytracer/sphere.h>
@@ -128,7 +128,5 @@ spec("Spheres tests")
 
         xs = sr_intersects(&s, &r);
         check(xs.count == 0);
-
-        free_intersection_list(&xs);
     }
 }
